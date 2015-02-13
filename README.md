@@ -15,6 +15,7 @@ Building this docset yourself is simple:
 1. `npm install -g coffee-script` (if you haven't already)
 2. `git clone` this repo
 3. `npm install`
+4. `coffee fetch.coffee` to download and process raw HTML files
 4. `coffee docset.coffee` to rebuild the Sqlite database
 5. `npm run tar` to generate `yeoman-generator.tgz` archive
 6. `npm run dash` to copy necessary files to `../Dash-User-Contributions` repo

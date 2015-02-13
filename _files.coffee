@@ -1,3 +1,15 @@
+url = require 'url'
+
+apiLink = ($el) ->
+  if $el.attr('href').match /\.js\.html/
+    $el.attr 'href', url.resolve @url, $el.attr('href')
+
+guideLink = ($el) ->
+  href = $el.attr('href').replace('/authoring/', '')
+  if /^\//.test href
+    href = url.resolve @url, href
+  $el.attr('href', href)
+
 module.exports =
   Guide:
     url: 'http://yeoman.io/authoring/'
@@ -20,6 +32,7 @@ module.exports =
     sectionSelectors:
       h2: 'Section'
       h3: 'Function'
+    processLink: guideLink
 
   Module:
     url: 'http://yeoman.github.io/generator/'
@@ -33,6 +46,7 @@ module.exports =
     sectionSelectors:
       h3: 'Section'
       h4: 'Function'
+    processLink: apiLink
 
   Class:
     url: 'http://yeoman.github.io/generator/'
@@ -49,6 +63,7 @@ module.exports =
     sectionSelectors:
       h3: 'Section'
       h4: 'Function'
+    processLink: apiLink
 
   Mixin:
     url: 'http://yeoman.github.io/generator/'
@@ -72,3 +87,4 @@ module.exports =
     sectionSelectors:
       h3: 'Section'
       h4: 'Function'
+    processLink: apiLink

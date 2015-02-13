@@ -8,12 +8,15 @@ download = require 'gulp-download'
 
 Files = require './_files.coffee'
 
-parse = (selector) -> map.obj (file) ->
+parse = (spec) -> map.obj (file) ->
   $ = cheerio.load(file.contents.toString())
   $('h2').each ->
     $el = $(@)
     $el.attr 'id', $el.text().replace(/\W+/g, '-')
-  file.contents = new Buffer($.html(selector))
+  $('a').each ->
+    $el = $(@)
+    spec.processLink?.call spec, $el
+  file.contents = new Buffer($.html(spec.contentSelector))
   return file
 
 wrap = (title, css) ->
@@ -42,7 +45,7 @@ for name, spec of Files
     url.resolve(spec.url, path)
 
   download(downloads)
-    .pipe parse(spec.selector)
+    .pipe parse(spec)
     .pipe wrap(filename, css.map (file) -> if /^http/.test(file) then file else path.basename(file))
     .pipe gulp.dest('html')
 
