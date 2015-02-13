@@ -1,0 +1,10 @@
+{
+  "name": "Yeoman Generator",
+  "version": "0.0.0",
+  "archive": "yeoman-generator.tgz",
+  "author": {
+    "name": "Gilad Gray",
+    "link": "https://github.com/giladgray"
+  },
+  "aliases": []
+}
